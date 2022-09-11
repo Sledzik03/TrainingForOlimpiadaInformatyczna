@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1565696489 source:c:\users\kuba\desktop\first\lekcja druga\main.cpp
+	<iostream>
+	<queue>
+	<vector>
+	<conio.h>
+	<windows.h>
+

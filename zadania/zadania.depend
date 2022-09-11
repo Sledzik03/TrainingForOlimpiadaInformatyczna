@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1565881067 source:c:\users\kuba\desktop\first\zadania\main.cpp
+	<iostream>
+	<math.h>
+	<string>
+	<time.h>
+	<cstdlib>
+	<conio.h>
+	<windows.h>
+	<fstream>
+

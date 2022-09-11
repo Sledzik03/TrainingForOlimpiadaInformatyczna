@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1578485067 source:c:\users\kuba\desktop\first\generator\main.cpp
+	<bits/stdc++.h>
+	<cstdlib>
+

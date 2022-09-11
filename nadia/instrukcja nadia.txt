@@ -1,0 +1,238 @@
+Python - Metoda połowienia - charakterystyka i zastosowanie
+
+wtorek, 2 listopada 2021
+18:36
+
+Metoda połowienia przedziału (zwana metodą bisekcji) opiera się na wyborze wyrazu środkowego i podziale danego przedziału na dwie części rozgraniczone tym wyrazem. Następnie jest sprawdzane, czy wyraz środkowy spełnia określone warunki, i na tej podstawie wybierana jest odpowiednia część przedziału do dalszych obliczeń.
+
+
+3.1. Przeszukiwanie ciągu liczbowego
+
+
+Rozwiązanie problemu przeszukiwania ciągu liczbowego polega na znalezieniu w ciągu liczbowym wyrazu spełniającego konkretne warunki. Dokładnie to określa specyfikacja podana poniżej.
+Specyfikacja:
+Dane:
+liczba naturalna: n>0 (liczba elementów listy 1T);
+n-elementowa lista zawierająca liczby całkowite: T[0...n - 1];
+liczba całkowita: szukana (wartość elementu szukanego w liście T).
+Wynik:
+jeśli szukana wartość znajduje się w liście T, wynikiem jest numer znalezionego elementu, w przeciwnym razie -1. Przeanalizujmy dwa przypadki:
+	• przeszukiwanie ciągu liczbowego, który nie jest uporządkowany, 
+	• przeszukiwanie ciągu liczbowego, który jest uporządkowany.
+
+
+Ćwiczenie 3.1.
+Algorytm przeszukiwania jest stosowany na różnych zbiorach zawierających informacje. Zgromadzone dane mogą być uporządkowane (np. w słowniku, encyklopedii) lub nieuporządkowane (np. w podręczniku, dlatego załącza się indeks). Podaj inne przykłady uporządkowanych i nieuporządkowanych zbiorów informacji.
+
+
+Liniowe przeszukiwanie ciągu liczbowego
+Liniowa metoda przeszukiwania ciągu liczbowego jest stosowana, gdy nie wiadomo, czy dany ciąg jest uporządkowany. W takiej sytuacji jesteśmy zmuszeni do sprawdzenia wszystkich jego wyrazów.
+
+Skonstruujmy algorytm w postaci schematu blokowego (rysunek 3.1) i programu w języku Python realizujący liniowe przeszukiwanie ciągu liczbowego.
+
+
+Rysunek 3.1. Schemat blokowy algorytmu realizującego liniowe przeszukiwanie ciągu liczbowego
+
+Program w języku Python:
+
+def szukaj(T, szukana): 
+   n = len(T) 
+   for i in range(n):
+      if T[i] == szukana:
+         return i
+   return -1 
+print(szukaj ( [7, 5, 6, 4, 5, 3, 4, 8, 2, 3], 8))
+print (szukaj ([9, 5, 6, 4, 5, 3, 4, 8, 2, 31], 1))
+
+Wyniki:
+7
+-1
+
+
+Operacją dominującą w tym algorytmie jest porównanie. W najgorszym przypadku, gdy szukany element nie znajduje się w Liście, podczas przeglądania ciągu wykonywanych jest n takich działań. W sytuacji, gdy pierwszy sprawdzany element ciągu będzie równy szukanemu, wykonamy tylko jedno porównanie. Liczba operacji dominujących może więc wynosić od 1 do n, dlatego złożoność czasowa tego algorytmu jest liniowa n.
+
+Zadanie 3.1
+Napisz programy wykorzystujące algorytm liniowego przeszukiwania ciągu liczbowego, które będą wykonywać:
+
+a) sprawdzenie, czy w n-elementowej liście zawierającej liczby rzeczywiste wprowadzone z klawiatury znajduje się liczba różna od 15,125,
+b) sprawdzenie, czy w 11-elementowej liście zawierającej liczby całkowite wprowadzone w programie znajduje się liczba parzysta,
+c) sprawdzenie, czy w 14-elementowej liście zawierającej liczby rzeczywiste wprowadzone w programie znajduje się liczba większa od 5,67,
+d) sprawdzenie, czy w n-elementowej liście zawierającej liczby całkowite wprowadzone z klawiatury znajduje się liczba mniejsza od 10.
+
+Wynikiem działania programów powinien być komunikat TAK lub NIE.
+
+
+Binarne przeszukiwanie ciągu liczbowego
+
+W przypadku, gdy ciąg liczbowy jest posortowany, aby uzyskać rozwiązanie, wystarczy przejrzeć tylko wybrane wyrazy tego ciągu. Dla ciągu uporządkowanego możemy zastosować algorytm przeszukiwania binarnego, który opiera się na metodzie połowienia przedziału. W danym n-wyrazowym ciągu liczbowym wyznaczamy wyraz środkowy i porównujemy go z szukaną liczbą. Jeśli obie wartości są równe, to szukany element został znaleziony, możemy więc zakończyć algorytm. Jeśli natomiast wyraz środkowy jest większy od szukanej liczby, należy kontynuować poszukiwania, ale już tylko wśród tych wyrazów ciągu, które mają niższy indeks niż wyraz środkowy. W przeciwnym razie, gdy jest on mniejszy od podanej wartości, szukamy go wśród wyrazów ciągu, które mają większe numery. Przeszukiwany ciąg w każdym kolejnym kroku zmniejsza się o połowę.
+
+Przykład 3.1.
+Przeanalizujmy przebieg algorytmu dla ciągu liczbowego (2, 3, 4, 5, 7, 9, 10, 12, 14) i szukanej wartości równej 5.
+
+Indeksy	0	1	2	3	4	5	6	7	8
+Krok 1.	2	3	4	5	7	9	10	12	14
+Krok 2.	2	3	4	5					
+Krok 3.			4	5					
+Krok 4.				5					
+
+
+Pogrubieniem wyróżniono wyznaczony w danym kroku wyraz środkowy, a szarym tłem - podciąg, w którym kontynuowane będą poszukiwania elementu. Aby wyznaczyć wyraz środkowy, należy zsumować indeksy pierwszego i ostatniego wyrazu przeszukiwanego ciągu liczbowego, a następnie wykonać dzielenie całkowite przez 2. Wynikiem jest indeks wyrazu środkowego. Sprawdź, czy wyrazy środkowe zostały wyznaczone poprawnie.
+
+W przedstawionym przykładzie dobrano taki ciąg liczbowy, aby szukany element, znajdujący się w liście, został znaleziony dopiero po dojściu do podciągu jednowyrazowego. Wynikiem jest 3, czyli indeks wyrazu ciągu o wartości 5.
+
+Przykład 3.2.
+Przeanalizujmy przebieg algorytmu dla ciągu liczbowego (-8, -7, -6,-2;0, 2, 3, 4, 5, 7, 8,10, 12, 14, 17, 19) i szukanej wartości równej 14.
+
+Indeksy	0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	15
+Krok 1.	-8	-7	-6	-2	0	2	3	4	5	7	8	10	12	14	17	19
+Krok 2.									5	7	8	10	12	14	17	19
+Krok 3.													12	14	17	19
+
+
+Pogrubieniem wyróżniono wyznaczony wyraz środkowy, a szarym tłem podciąg, w którym kontynuowane będą poszukiwania elementu.
+
+W przedstawionym przykładzie dobrano taki ciąg liczbowy, aby szukany wyraz środkowy, znajdujący się w liście, został znaleziony przed dojściem do podciągu jednowyrazowego. Gdy środkowy wyraz jest równy szukanej liczbie, algorytm zostaje zakończony, a wynikiem jest indeks znalezionego elementu w ciągu liczbowym. W tym przykładzie wynikiem jest 13, czyli indeks wyrazu ciągu, który ma wartość 14.
+
+Skonstruujmy algorytm rekurencyjny realizujący przeszukiwanie binarne ciągu uporządkowanego w postaci programu w języku Python.
+
+Program w języku Python:
+def szukaj (T, lewy, prawy, szukana):
+  if lewy <= prawy:
+    srodek = (lewy + prawy) // 2
+    if T[srodek] == szukana:
+       return srodek
+    if T[srodek] < szukana:
+       return szukaj(T, srodek + 1, prawy, szukana)
+    return szukaj(T, lewy, srodek - 1, szukana)
+  return -1
+print(szukaj ([ -8, -7, -6, -2, 0, 2, 3, 4, 5, 7, 8, 10, 12, 14, 17, 19],0, 15, 14))
+
+Wynik:
+13
+
+
+Ćwiczenie 3.2
+Na podstawie kodu programu przeanalizuj przebieg algorytmu. Odpowiedz na pytania i wskaż odpowiednie miejsca w kodzie programu.
+a) Czy algorytm kończy się w przypadku, gdy wyraz środkowy jest równy szukanej liczbie?
+b) Czy w przypadku gdy w przeszukiwanym ciągu nie ma szukanej liczby, wypisywany jest komunikat NIE?
+c) Jakie obliczenie trzeba wykonać, aby został wyznaczony wyraz środkowy?
+d) W jaki sposób wyznaczane są kolejne podciągi do przeszukiwania?
+
+Algorytm realizujący liniowe przeszukiwanie nieuporządkowanego ciągu liczbowego, omówiony w tym podrozdziale, ma złożoność liniową n. W przedstawionym powyżej algorytmie przeszukiwania binarnego korzystamy z metody połowienia przedziałów, powinniśmy więc uzyskać szybszy algorytm. Liczba porównań jest tutaj proporcjonalna do liczby podziałów przeszukiwanego ciągu. Załóżmy, że mamy n-wyrazowy ciąg. Jeżeli szukana liczba znajduje się w ciągu, dzielimy ciąg co najwyżej do uzyskania jednego wyrazu, natomiast jeżeli szukanej liczby nie ma w ciągu, algorytm jest realizowany, aż dojdzie do jednowyrazowego podciągu. Maksymalnie wykonywanych jest log2 👎 operacji dzielenia
+ciągu. Otrzymujemy zatem złożoność logarytmiczną log n.
+
+Ćwiczenie 3.3
+Przedstaw przebieg algorytmu realizującego przeszukiwanie binarne dla podanych ciągów liczbowych (podobnie jak w przykładach 3.1 i 3.2). Szukaną liczbą jest 6.
+a) (1,2, 3, 4, 5, 6, 7, 8, 9, 10),
+b) (1, 1,2, 4, 7, 8, 8, 9, 9),
+c)(0, 1,2, 4, 6, 7, 7, 8, 8, 10).
+
+
+Zadanie 3.2.
+Skonstruuj algorytm iteracyjny w postaci schematu blokowego i programu realizujący przeszukiwanie binarne uporządkowanego n-wyrazowego ciągu liczbowego. Liczba wyrazów ciągu n, przeszukiwany ciąg oraz szukana liczba powinny być wprowadzane z klawiatury.
+
+
+Zadanie 3.3.
+Podaj specyfikację zadania i napisz program realizujący wstawianie liczby wprowadzone z klawiatury do uporządkowanego ciągu liczbowego w takie miejsce, aby po wstawieniu ciąg nadal był uporządkowany. Algorytm powinien wyznaczać pozycję wstawienia liczby do uporządkowanego ciągu. Do wstawiania możesz wykorzystać metodę insert().
+
+
+
+
+ZADANIE domowe
+Zad 3.1 b i c 
+Zad. 3.2
+
+########################### z lekcji ################################################
+
+# Schemat blokowy za pomocą pętli for (rys. 3.1)
+
+
+def szukaj(T, szukana):
+n = len(T)
+for i in range(n):
+if T[i] == szukana:
+return i
+return -1
+print(szukaj ( [7, 5, 6, 4, 5, 3, 4, 8, 2, 3], 8))
+print (szukaj ([9, 5, 6, 4, 5, 3, 4, 8, 2, 31], 1))
+
+
+# Zad. Powyższy algorytm wykonaj za pomocą pętli while na podstawie schematu blokowego (rys. 3.1)
+def szukaj2(T, szukana):
+n = len(T)
+i = 0
+while i < n:
+if T[i] == szukana:
+return i
+i = i + 1
+return -1
+
+
+print(szukaj2 ( [7, 5, 6, 4, 5, 3, 4, 8, 2, 3], 8))
+print (szukaj2 ([9, 5, 6, 4, 5, 3, 4, 8, 2, 31], 1))
+
+
+
+# # Zad. 3.1
+# a) sprawdzenie, czy w n-elementowej liście zawierającej liczby rzeczywiste wprowadzone z klawiatury znajduje się liczba różna od 15,125, 
+
+
+def szukaj(T, szukana):
+n = int(input("Poaj liczbę elementów listy: "))
+T=[]
+for i in range(n):
+element = float(input("Wprowadź rzczywistą: "))
+T.append(element)
+for i in range(n):
+if T[i] != szukana:
+return "TAK"
+return "NIE"
+print(szukaj ( [7, 5, 6, 4, 5, 3, 4, 8, 2, 3], 15.125))
+print (szukaj ([15.125, 15.125], 15.125))
+
+
+
+
+# a)
+def szukaj(T, szukana):
+n = len(T)
+for i in range(n):
+if T[i] != szukana:
+return "TAK"
+return "NIE"
+
+
+print(szukaj ( [7, 5, 6, 4, 5, 3, 4, 8, 2, 3], 15.125))
+print (szukaj ([15.125, 15.125], 15.125))
+
+
+
+
+# b)
+def szukaj():
+T = []
+n = int(input("Podaj ilość elementów listy: "))
+for i in range(n):
+element = float(input("Wprowadź wartość: "))
+T.append(element)
+# print(T)
+for i in range(n):
+if T[i] % 2 == 0:
+return "TAK"
+return "NIE"
+print(szukaj())
+
+
+
+
+# Przykład 3.2
+def szukaj (T, lewy, prawy, szukana):
+if lewy <= prawy:
+srodek = (lewy + prawy) // 2
+if T[srodek] == szukana:
+return srodek
+if T[srodek] < szukana:
+return szukaj(T, srodek + 1, prawy, szukana)
+return szukaj(T, lewy, srodek - 1, szukana)
+return -1
+print(szukaj ([ -8, -7, -6, -2, 0, 2, 3, 4, 5, 7, 8, 10, 12, 14, 17, 19],0, 15, 14))

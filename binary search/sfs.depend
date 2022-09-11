@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1565610737 source:c:\users\kuba\desktop\first\sfs\main.cpp
+	<iostream>
+	<cstdlib>
+	<time.h>
+	<conio.h>
+	<windows.h>
+

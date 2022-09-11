@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1600776372 source:c:\users\kuba\desktop\first\zadanie1.16.switch\main.cpp
+	<iostream>
+	<math.h>
+

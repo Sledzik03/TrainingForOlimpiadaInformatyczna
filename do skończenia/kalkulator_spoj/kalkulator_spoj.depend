@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1565987606 source:c:\users\kuba\desktop\first\kalkulator_spoj\main.cpp
+	<iostream>
+	<cstdlib>
+	<string>
+

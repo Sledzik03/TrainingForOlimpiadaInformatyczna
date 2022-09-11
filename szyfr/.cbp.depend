@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1565966139 source:c:\users\kuba\desktop\first\.cbp\szyfr\main.cpp
+	<iostream>
+	<math.h>
+	<conio.h>
+	<cstdlib>
+
+1578417647 source:c:\users\kuba\desktop\first\szyfr\main.cpp
+	<bits/stdc++.h>
+

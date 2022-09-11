@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1569879045 source:c:\users\kuba\desktop\first\ko³o\main.cpp
+	<iostream>
+	<math.h>
+	<cmath>
+	<iomanip>
+	<string>
+

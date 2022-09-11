@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1568904089 source:c:\users\kuba\desktop\first\potêgiliczby2\main.cpp
+	<iostream>
+	<bits/stdc++.h>
+	<math.h>
+
